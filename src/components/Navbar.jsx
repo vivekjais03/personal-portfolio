@@ -84,11 +84,11 @@ const Navbar = () => {
       </motion.nav>
 
       {/* Mobile Menu Toggle */}
-      <div className="md:hidden fixed top-4 left-4 z-50">
+      <div className="md:hidden fixed top-4 right-4 z-50">
         <motion.button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle Mobile Menu"
-          className="p-3 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white shadow-lg"
+          className="p-3 rounded-lg bg-black/80 backdrop-blur-md border border-white/20 text-white shadow-lg"
           whileTap={{ scale: 0.95 }}
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.3 }}
@@ -126,18 +126,19 @@ const Navbar = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed top-20 left-4 right-4 max-w-sm mx-auto
-                       bg-black/90 backdrop-blur-lg rounded-2xl shadow-2xl overflow-hidden z-40"
+            className="fixed inset-x-4 top-20 bottom-4
+                       bg-black/95 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden z-40
+                       flex flex-col"
           >
-            <div className="flex flex-col p-4 space-y-3">
+            <div className="flex flex-col p-6 space-y-4 overflow-y-auto">
               {navItems.map((item) => (
                 <motion.button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`flex items-center space-x-3 px-4 py-3 rounded-lg cursor-pointer transition-colors duration-300 ${
+                  className={`flex items-center space-x-4 px-6 py-4 rounded-xl cursor-pointer transition-all duration-300 ${
                     activeId === item.id
-                      ? "bg-cyan-600 text-white shadow-md"
-                      : "text-gray-300 hover:text-white hover:bg-white/10"
+                      ? "bg-gradient-to-r from-purple-600 to-violet-600 text-white shadow-lg"
+                      : "text-gray-300 hover:text-white hover:bg-white/10 hover:scale-105"
                   }`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}

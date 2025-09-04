@@ -85,8 +85,8 @@ const projectsData = [
       { name: 'TailwindCSS', iconType: 'SiTailwindcss', color: 'text-teal-400' },
       { name: 'Framer Motion', iconType: 'FaCode', color: 'text-purple-400' }
     ],
-    github: 'https://github.com/user/portfolio-website',
-    demo: 'https://portfolio-website.demo',
+    github: 'https://github.com/vivekjais03/personal-portfolio',
+    demo: 'https://personal-portfolio-git-main-vivekjais03s-projects.vercel.app/',
     category: 'Frontend',
     image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=500&h=300&fit=crop&crop=center',
     gradient: 'from-blue-600/20 to-blue-400/20',
