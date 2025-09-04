@@ -298,7 +298,7 @@ const Projects = () => {
             <h2 className="relative text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight">
               Pro<span className="bg-gradient-to-r from-purple-400 via-violet-500 to-purple-700 bg-clip-text text-transparent">j</span>ects
               <motion.span
-                className="absolute left-1/2 -bottom-2 w-24 h-1 bg-gradient-to-r from-purple-400 via-violet-500 to-purple-700 rounded-full"
+                className="absolute left-1/2 -translate-x-1/2 -bottom-2 w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-purple-400 via-violet-500 to-purple-700 rounded-full"
                 initial={{ scaleX: 0, opacity: 0 }}
                 whileInView={{ scaleX: 1, opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
