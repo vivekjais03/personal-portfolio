@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="min-h-screen bg-neon-gradient text-white">
       <Navbar />
-      <div className="md:ml-20 pb-20 md:pb-0">
+      <div className="md:ml-20">
         <Hero />
         <About />
         <Services />
