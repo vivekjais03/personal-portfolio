@@ -13,14 +13,16 @@ function App() {
   return (
     <div className="min-h-screen bg-neon-gradient text-white">
       <Navbar />
-      <Hero />
-      <About />
-      <Services />
-      <Projects />
-      <Experience />
-      <Education />
-      <Contact />
-      <Footer />
+      <div className="md:ml-20">
+        <Hero />
+        <About />
+        <Services />
+        <Projects />
+        <Experience />
+        <Education />
+        <Contact />
+        <Footer />
+      </div>
     </div>
   );
 }

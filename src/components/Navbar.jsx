@@ -30,14 +30,16 @@ const Navbar = () => {
   };
 
   return (
-    <motion.nav
-      initial={{ x: -100, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className="fixed top-0 left-0 h-full w-20 
-                 bg-black/40 backdrop-blur-md border-r border-white/10 shadow-xl 
-                 flex flex-col items-center py-10 space-y-6 z-50"
-    >
+    <>
+      {/* Desktop Sidebar */}
+      <motion.nav
+        initial={{ x: -100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="hidden md:flex fixed top-0 left-0 h-full w-20 
+                   bg-black/40 backdrop-blur-md border-r border-white/10 shadow-xl 
+                   flex-col items-center py-10 space-y-6 z-50"
+      >
       {/* Logo */}
       <motion.div
         className="mb-10 text-white font-bold text-2xl tracking-wide"
@@ -79,14 +81,16 @@ const Navbar = () => {
         ))}
       </div>
 
+      </motion.nav>
+
       {/* Mobile Menu Toggle */}
-      <div className="md:hidden absolute bottom-10 left-1/2 transform -translate-x-1/2">
+      <div className="md:hidden fixed top-4 left-4 z-50">
         <motion.button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle Mobile Menu"
-          className="p-3 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white"
+          className="p-3 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white shadow-lg"
           whileTap={{ scale: 0.95 }}
-          whileHover={{ rotate: 180 }}
+          whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.3 }}
         >
           <svg
@@ -122,8 +126,8 @@ const Navbar = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed top-16 left-1/2 transform -translate-x-1/2 w-64 max-w-[calc(100vw-2rem)] 
-                       bg-black/80 backdrop-blur-lg rounded-2xl shadow-lg overflow-hidden z-50"
+            className="fixed top-20 left-4 right-4 max-w-sm mx-auto
+                       bg-black/90 backdrop-blur-lg rounded-2xl shadow-2xl overflow-hidden z-40"
           >
             <div className="flex flex-col p-4 space-y-3">
               {navItems.map((item) => (
@@ -146,7 +150,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </>
   );
 };
 
