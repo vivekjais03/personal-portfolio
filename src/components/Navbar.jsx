@@ -83,68 +83,72 @@ const Navbar = () => {
 
       </motion.nav>
 
-      {/* Mobile Menu Toggle */}
-      <div className="md:hidden fixed top-4 right-4 z-50">
-        <motion.button
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle Mobile Menu"
-          className="p-3 rounded-lg bg-black/80 backdrop-blur-md border border-white/20 text-white shadow-lg"
-          whileTap={{ scale: 0.95 }}
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.3 }}
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+      {/* Mobile Bottom Navigation */}
+      <motion.div
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="md:hidden fixed bottom-0 left-0 right-0 z-50
+                   bg-black/90 backdrop-blur-xl border-t border-white/10
+                   px-2 py-2 safe-area-pb"
+      >
+        <div className="flex justify-around items-center max-w-md mx-auto">
+          {navItems.slice(0, 5).map((item) => (
+            <motion.button
+              key={item.id}
+              onClick={() => scrollToSection(item.id)}
+              className={`flex flex-col items-center justify-center p-2 rounded-lg min-w-[60px] transition-all duration-300 ${
+                activeId === item.id
+                  ? "text-purple-400 bg-purple-500/20"
+                  : "text-gray-400 hover:text-white"
+              }`}
+              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.05 }}
+            >
+              <span className="text-lg mb-1">{item.icon}</span>
+              <span className="text-xs font-medium">{item.label}</span>
+            </motion.button>
+          ))}
+          
+          {/* More Menu Button */}
+          <motion.button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="flex flex-col items-center justify-center p-2 rounded-lg min-w-[60px] text-gray-400 hover:text-white transition-colors duration-300"
+            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.05 }}
           >
-            {isMobileMenuOpen ? (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            ) : (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            )}
-          </svg>
-        </motion.button>
-      </div>
+            <span className="text-lg mb-1">⋯</span>
+            <span className="text-xs font-medium">More</span>
+          </motion.button>
+        </div>
+      </motion.div>
 
-      {/* Mobile Menu */}
+      {/* Mobile More Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: -20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -20 }}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed inset-x-4 top-20 bottom-4
-                       bg-black/95 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden z-40
-                       flex flex-col"
+            className="md:hidden fixed bottom-20 left-4 right-4 z-40
+                       bg-black/95 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden
+                       border border-white/10"
           >
-            <div className="flex flex-col p-6 space-y-4 overflow-y-auto">
-              {navItems.map((item) => (
+            <div className="p-4">
+              {navItems.slice(5).map((item) => (
                 <motion.button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`flex items-center space-x-4 px-6 py-4 rounded-xl cursor-pointer transition-all duration-300 ${
+                  className={`flex items-center space-x-3 w-full px-4 py-3 rounded-lg transition-all duration-300 ${
                     activeId === item.id
-                      ? "bg-gradient-to-r from-purple-600 to-violet-600 text-white shadow-lg"
-                      : "text-gray-300 hover:text-white hover:bg-white/10 hover:scale-105"
+                      ? "bg-purple-600 text-white"
+                      : "text-gray-300 hover:text-white hover:bg-white/10"
                   }`}
-                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <span className="text-xl">{item.icon}</span>
-                  <span className="font-semibold">{item.label}</span>
+                  <span className="text-lg">{item.icon}</span>
+                  <span className="font-medium">{item.label}</span>
                 </motion.button>
               ))}
             </div>
