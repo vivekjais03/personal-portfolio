@@ -88,7 +88,7 @@ const Navbar = () => {
         <motion.button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle Mobile Menu"
-          className="p-4 rounded-2xl bg-gradient-to-r from-purple-600/90 to-violet-600/90 backdrop-blur-xl border border-purple-400/30 text-white shadow-2xl"
+          className="p-4 rounded-2xl bg-gradient-to-r from-black/90 to-gray-800/90 backdrop-blur-xl border border-gray-600/30 text-white shadow-2xl"
           whileTap={{ scale: 0.9 }}
           whileHover={{ scale: 1.05, rotate: 180 }}
           transition={{ duration: 0.3 }}
@@ -138,8 +138,8 @@ const Navbar = () => {
               exit={{ opacity: 0, x: 300 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
               className="md:hidden fixed top-0 right-0 h-full w-80 max-w-[85vw]
-                         bg-gradient-to-b from-slate-900/95 to-purple-900/95 backdrop-blur-xl
-                         border-l border-purple-400/20 shadow-2xl z-40"
+                         bg-gradient-to-b from-black/95 to-gray-900/95 backdrop-blur-xl
+                         border-l border-gray-600/20 shadow-2xl z-40"
             >
               <div className="flex flex-col h-full p-6 pt-20">
                 <div className="flex-1 space-y-2">
@@ -149,7 +149,7 @@ const Navbar = () => {
                       onClick={() => scrollToSection(item.id)}
                       className={`flex items-center space-x-4 w-full px-6 py-4 rounded-xl transition-all duration-300 ${
                         activeId === item.id
-                          ? "bg-gradient-to-r from-purple-600 to-violet-600 text-white shadow-lg scale-105"
+                          ? "bg-gradient-to-r from-gray-700 to-gray-800 text-white shadow-lg scale-105 border border-gray-500/50"
                           : "text-gray-300 hover:text-white hover:bg-white/10 hover:scale-105"
                       }`}
                       whileHover={{ x: 5 }}
