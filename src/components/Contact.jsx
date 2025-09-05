@@ -21,28 +21,26 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Using Formspree for form handling
-      const response = await fetch('https://formspree.io/f/xpwzgqpb', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-        }),
-      });
-
-      if (response.ok) {
-        alert('✅ Thank you for your message! I will get back to you soon.');
+      // Create mailto link as fallback
+      const subject = encodeURIComponent(`Portfolio Contact: Message from ${formData.name}`);
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\n` +
+        `Email: ${formData.email}\n\n` +
+        `Message:\n${formData.message}`
+      );
+      
+      // Open email client
+      window.location.href = `mailto:jaiswalvivek421@gmail.com?subject=${subject}&body=${body}`;
+      
+      // Show success message
+      setTimeout(() => {
+        alert('✅ Your email client has been opened with the message. Please send the email to complete your message.');
         setFormData({ name: '', email: '', message: '' });
-      } else {
-        throw new Error('Failed to send message');
-      }
+      }, 1000);
+      
     } catch (error) {
-      console.error('Error sending message:', error);
-      alert('❌ Sorry, there was an error sending your message. Please try again or contact me directly at jaiswalvivek421@gmail.com');
+      console.error('Error:', error);
+      alert('❌ Please contact me directly at jaiswalvivek421@gmail.com');
     } finally {
       setIsSubmitting(false);
     }
@@ -283,7 +281,7 @@ const Contact = () => {
 
               <div className="relative z-10">
                 <h3 className="text-2xl font-bold text-white mb-6">Send a Message</h3>
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6" netlify>
                   {/* Name */}
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
