@@ -37,7 +37,7 @@ const Contact = () => {
       });
 
       if (response.ok) {
-        alert('✅ Perfect! Aapka message mere Gmail pe aa gaya hai. Main 24 hours mein reply karunga!');
+        alert('✅ Thank you for your message! I have received it and will get back to you soon.');
         setFormData({ name: '', email: '', message: '' });
       } else {
         throw new Error('Failed to send');
