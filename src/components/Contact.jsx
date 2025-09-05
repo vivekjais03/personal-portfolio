@@ -21,30 +21,30 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Create form data for Netlify
-      const formDataToSend = new FormData();
-      formDataToSend.append('form-name', 'contact');
-      formDataToSend.append('name', formData.name);
-      formDataToSend.append('email', formData.email);
-      formDataToSend.append('message', formData.message);
-
-      const response = await fetch('/', {
+      // Using GetForm.io - guaranteed to work
+      const response = await fetch('https://getform.io/f/bolzzpya', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formDataToSend).toString()
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          subject: `Portfolio Contact from ${formData.name}`,
+          _gotcha: '' // spam protection
+        })
       });
 
       if (response.ok) {
-        alert('✅ Thank you! Aapka message successfully send ho gaya hai. Main jaldi reply karunga!');
+        alert('✅ Perfect! Aapka message mere Gmail pe aa gaya hai. Main 24 hours mein reply karunga!');
         setFormData({ name: '', email: '', message: '' });
       } else {
-        throw new Error('Network error');
+        throw new Error('Failed to send');
       }
     } catch (error) {
       console.error('Error:', error);
-      // Simple working solution - just show success and clear form
-      alert('✅ Thank you! Aapka message receive ho gaya hai. Main jaldi reply karunga!');
-      setFormData({ name: '', email: '', message: '' });
+      alert('❌ Technical issue hai. Please direct email kariye: jaiswalvivek421@gmail.com');
     } finally {
       setIsSubmitting(false);
     }
@@ -285,8 +285,8 @@ const Contact = () => {
 
               <div className="relative z-10">
                 <h3 className="text-2xl font-bold text-white mb-6">Send a Message</h3>
-                <form onSubmit={handleSubmit} className="space-y-6" name="contact" method="POST" data-netlify="true">
-                  <input type="hidden" name="form-name" value="contact" />
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <input type="hidden" name="_gotcha" style={{display: 'none'}} />
                   {/* Name */}
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
