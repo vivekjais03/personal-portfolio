@@ -21,25 +21,26 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append('access_key', '8f5c7e2d-4b3a-4c9e-8f1d-2a5b6c7d8e9f');
-      formDataToSend.append('name', formData.name);
-      formDataToSend.append('email', formData.email);
-      formDataToSend.append('message', formData.message);
-      formDataToSend.append('subject', `Portfolio Contact from ${formData.name}`);
-
-      const response = await fetch('https://api.web3forms.com/submit', {
+      // Using Formspree - no setup required
+      const response = await fetch('https://formspree.io/f/mjkvoqpw', {
         method: 'POST',
-        body: formDataToSend
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _replyto: formData.email,
+          _subject: `Portfolio Contact from ${formData.name}`
+        })
       });
 
-      const result = await response.json();
-
-      if (result.success) {
+      if (response.ok) {
         alert('✅ Thank you! Aapka message successfully send ho gaya hai. Main jaldi reply karunga!');
         setFormData({ name: '', email: '', message: '' });
       } else {
-        throw new Error('Failed to send message');
+        throw new Error('Formspree error');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -285,9 +286,6 @@ const Contact = () => {
               <div className="relative z-10">
                 <h3 className="text-2xl font-bold text-white mb-6">Send a Message</h3>
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <input type="hidden" name="access_key" value="8f5c7e2d-4b3a-4c9e-8f1d-2a5b6c7d8e9f" />
-                  <input type="hidden" name="subject" value="New Portfolio Contact" />
-                  <input type="hidden" name="from_name" value="Portfolio Contact Form" />
                   {/* Name */}
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
