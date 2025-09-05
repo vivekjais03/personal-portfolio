@@ -21,26 +21,29 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Create mailto link as fallback
-      const subject = encodeURIComponent(`Portfolio Contact: Message from ${formData.name}`);
-      const body = encodeURIComponent(
-        `Name: ${formData.name}\n` +
-        `Email: ${formData.email}\n\n` +
-        `Message:\n${formData.message}`
-      );
-      
-      // Open email client
-      window.location.href = `mailto:jaiswalvivek421@gmail.com?subject=${subject}&body=${body}`;
-      
-      // Show success message
-      setTimeout(() => {
-        alert('✅ Your email client has been opened with the message. Please send the email to complete your message.');
+      const formDataToSend = new FormData();
+      formDataToSend.append('access_key', '8f5c7e2d-4b3a-4c9e-8f1d-2a5b6c7d8e9f');
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('message', formData.message);
+      formDataToSend.append('subject', `Portfolio Contact from ${formData.name}`);
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formDataToSend
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert('✅ Thank you! Aapka message successfully send ho gaya hai. Main jaldi reply karunga!');
         setFormData({ name: '', email: '', message: '' });
-      }, 1000);
-      
+      } else {
+        throw new Error('Failed to send message');
+      }
     } catch (error) {
       console.error('Error:', error);
-      alert('❌ Please contact me directly at jaiswalvivek421@gmail.com');
+      alert('❌ Sorry, message send nahi hua. Please directly email kariye: jaiswalvivek421@gmail.com');
     } finally {
       setIsSubmitting(false);
     }
@@ -281,7 +284,10 @@ const Contact = () => {
 
               <div className="relative z-10">
                 <h3 className="text-2xl font-bold text-white mb-6">Send a Message</h3>
-                <form onSubmit={handleSubmit} className="space-y-6" netlify>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <input type="hidden" name="access_key" value="8f5c7e2d-4b3a-4c9e-8f1d-2a5b6c7d8e9f" />
+                  <input type="hidden" name="subject" value="New Portfolio Contact" />
+                  <input type="hidden" name="from_name" value="Portfolio Contact Form" />
                   {/* Name */}
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
